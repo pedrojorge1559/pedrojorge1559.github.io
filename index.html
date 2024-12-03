@@ -21,13 +21,17 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
+            overflow-x: hidden;
+            width: 100%;
+            box-sizing: border-box;
         }
         header {
             text-align: center;
             padding: 1.5rem 0;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         header::before {
             content: '';
@@ -57,8 +61,12 @@
         .menu {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 1.5rem;
-            margin-top: 1rem;
+            margin: 1rem auto;
+            padding: 0;
+            width: 100%;
+            box-sizing: border-box;
         }
         .menu-button {
             background-color: transparent;
@@ -74,6 +82,9 @@
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .menu-button::before {
             content: '';
@@ -117,12 +128,15 @@
             transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             cursor: pointer;
-            min-height: 150px;
+            min-height: 120px;
             transform-style: preserve-3d;
             backface-visibility: hidden;
             transform-origin: center;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            height: auto;
+            margin-bottom: 1rem;
+            overflow: hidden;
         }
         
         .card.expandido {
@@ -273,6 +287,7 @@
             .content {
                 grid-template-columns: 1fr;
                 gap: 1rem;
+                padding: 0 10px;
             }
             
             .card {
@@ -280,81 +295,75 @@
             }
 
             .card.expandido {
-                min-height: 300px;
                 position: fixed;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: calc(100% - 2rem);
+                width: 90%;
                 height: auto;
-                max-height: 90vh;
+                max-height: 80vh;
                 overflow-y: auto;
+                margin: 0;
+                padding: 1.5rem;
                 z-index: 1000;
             }
 
             .menu {
                 flex-direction: column;
-                gap: 1rem;
+                width: 100%;
+                padding: 0;
+                margin: 1rem auto;
             }
 
             .menu-button {
-                width: 100%;
-                max-width: 280px;
+                width: 80%;
+                max-width: 300px;
+                margin: 0.5rem auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
-            .expanded-view::before {
-                content: '';
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 999;
+
+            .menu-button i {
+                margin-right: 8px;
+                display: inline-flex;
+                align-items: center;
             }
         }
 
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.8rem;
+                margin-bottom: 0.3rem;
             }
 
-            .container {
-                padding: 1rem 0.5rem;
+            .subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
             }
 
             .card {
                 padding: 1rem;
-            }
-            
-            .card h2 {
-                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
             }
 
-            .card p {
-                font-size: 0.9rem;
-            }
-
-            .card::after {
-                top: 15px;
-                right: 15px;
-                font-size: 20px;
-                width: 25px;
-                height: 25px;
-                line-height: 25px;
-            }
-
-            .projeto-btn {
-                width: 100%;
-                justify-content: center;
+            .card.expandido {
+                width: 95%;
+                padding: 1rem;
             }
 
             .conteudo-expandido {
+                padding: 0.5rem;
+            }
+
+            .menu-button {
+                padding: 8px 16px;
                 font-size: 0.9rem;
             }
 
             .menu-button {
-                font-size: 0.9rem;
-                padding: 10px 20px;
+                width: 90%;
             }
         }
 
@@ -374,19 +383,16 @@
 
         @media (min-width: 1920px) {
             .container {
-                max-width: 1600px;
+                max-width: 1800px;
             }
 
-            h1 {
-                font-size: 4rem;
-            }
-
-            .subtitle {
-                font-size: 1.4rem;
+            .content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
             }
 
             .card {
-                padding: 2.5rem;
+                padding: 2rem;
             }
         }
 
@@ -441,6 +447,124 @@
 
         .dark-mode .projeto-btn:hover {
             background-color: #357abd;
+        }
+
+        body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        @media (hover: none) {
+            .card:not(.expandido):hover {
+                transform: none;
+            }
+
+            .menu-button:hover {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card::after {
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 1rem auto;
+            padding: 0;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .menu-button {
+            background-color: transparent;
+            color: #2c3e50;
+            border: 2px solid #2c3e50;
+            border-radius: 30px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                width: 100%;
+                padding: 0;
+                margin: 1rem auto;
+                gap: 1rem;
+            }
+
+            .menu-button {
+                width: 85%;
+                max-width: 300px;
+                margin: 0 auto;
+                padding: 12px 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .menu-button i {
+                margin-right: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu {
+                width: 100%;
+                padding: 0;
+            }
+
+            .menu-button {
+                width: 85%;
+                font-size: 0.9rem;
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
@@ -596,13 +720,11 @@
 
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', function(e) {
+                const isMobile = window.innerWidth <= 768;
                 const rect = card.getBoundingClientRect();
-                const isButton = (
-                    e.clientX >= rect.right - 50 && 
-                    e.clientX <= rect.right - 20 &&
-                    e.clientY >= rect.top + 20 &&
-                    e.clientY <= rect.top + 50
-                );
+                const isButton = isMobile ? 
+                    (e.clientX >= rect.right - 60 && e.clientX <= rect.right - 15) :
+                    (e.clientX >= rect.right - 50 && e.clientX <= rect.right - 20);
                 
                 const content = document.querySelector('.content');
                 
@@ -680,6 +802,25 @@
         });
 
         document.querySelector('.content').classList.add('grid-view');
+
+        document.addEventListener('touchmove', function(e) {
+            if (document.querySelector('.expanded-view')) {
+                const expandedCard = document.querySelector('.card.expandido');
+                if (!expandedCard.contains(e.target)) {
+                    e.preventDefault();
+                }
+            }
+        }, { passive: false });
+
+        document.addEventListener('click', function(e) {
+            const expandedCard = document.querySelector('.card.expandido');
+            if (expandedCard && !expandedCard.contains(e.target)) {
+                const content = document.querySelector('.content');
+                expandedCard.classList.remove('expandido');
+                content.classList.remove('expanded-view');
+                content.classList.add('grid-view');
+            }
+        });
     </script>
 </body>
 </html>
